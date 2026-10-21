@@ -1,129 +1,148 @@
 # TaskFlow — Full-Stack Task Manager
 
-TaskFlow is a full-stack task management application that allows users to create, view, edit, complete, delete, and search tasks.
+TaskFlow is a full-stack task management application built with React, Node.js, Express.js, and MongoDB. It provides a clean dashboard to create, organize, search, update, and track tasks.
 
 ## Features
 
-- Create new tasks with a title and description
-- View all tasks
+- Create tasks with a title and description
+- View all tasks in a dashboard
 - Edit existing tasks
 - Mark tasks as completed or pending
 - Delete tasks
-- Search tasks by name
-- Store tasks persistently in MongoDB
-- Validate empty task titles
+- Search tasks by title
+- Persist task data in MongoDB Atlas
+- Validate task input and handle API errors
+- Responsive user interface
 
 ## Tech Stack
 
-**Frontend**
-- React
-- Vite
-- CSS
-- Lucide React
-
-**Backend**
-- Node.js
-- Express.js
-- REST API
-
-**Database**
-- MongoDB Atlas
-- Mongoose
+| Layer | Technologies |
+|---|---|
+| Frontend | React, Vite, CSS, Lucide React |
+| Backend | Node.js, Express.js |
+| Database | MongoDB Atlas, Mongoose |
+| API | REST API |
+| Version Control | Git, GitHub |
 
 ## Project Structure
 
 ```text
-taskflow/
+TaskFlow/
 ├── backend/
-│   ├── controllers/
-│   ├── config/
 │   ├── models/
+│   │   └── Task.js
 │   ├── routes/
-│   ├── .env
-│   └── server.js
+│   │   └── taskRoutes.js
+│   ├── server.js
+│   ├── package.json
+│   └── .env                 # Create locally; not committed
 ├── frontend/
 │   ├── src/
-│   └── package.json
+│   │   ├── App.jsx
+│   │   ├── App.css
+│   │   ├── index.css
+│   │   └── main.jsx
+│   ├── package.json
+│   └── vite.config.js
 ├── .gitignore
 └── README.md
 ```
 
 ## Getting Started
 
-### 1. Install dependencies
+### Prerequisites
 
-Open a terminal in the backend directory:
+- Node.js and npm
+- A MongoDB Atlas account or MongoDB connection string
+- Git
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/h-parashar009/TaskFlow.git
+cd TaskFlow
+```
+
+### 2. Install backend dependencies
 
 ```bash
 cd backend
 npm install
 ```
 
-Open another terminal in the frontend directory:
+### 3. Configure environment variables
 
-```bash
-cd frontend
-npm install
-```
-
-### 2. Configure environment variables
-
-Create a `.env` file inside the backend directory:
+Create a `.env` file inside the `backend` directory:
 
 ```env
 PORT=5000
 MONGODB_URI=your_mongodb_connection_string
 ```
 
-Replace the placeholder with your MongoDB connection string. Never commit your `.env` file or share database credentials publicly.
+Replace the placeholder with your MongoDB connection string. Keep `.env` private and never commit database credentials to GitHub.
 
-### 3. Start the backend
+### 4. Start the backend
 
-From the backend directory, run:
-
-```bash
-npm start
-```
-
-If a `start` script is not configured in `package.json`, use:
+From the `backend` directory, run:
 
 ```bash
 node server.js
 ```
 
-### 4. Start the frontend
+The API will run at `http://localhost:5000` if port 5000 is available.
 
-From the frontend directory, run:
+Check the backend health endpoint:
+
+```text
+http://localhost:5000/api/health
+```
+
+### 5. Start the frontend
+
+Open a second terminal and run:
 
 ```bash
+cd TaskFlow/frontend
+npm install
 npm run dev
 ```
 
-Open the local URL shown in the terminal, usually `http://localhost:5173`.
+Open the local URL printed by Vite, usually `http://localhost:5173`.
 
 ## API Endpoints
 
 | Method | Endpoint | Description |
 |---|---|---|
 | GET | `/api/health` | Check server and database status |
-| GET | `/api/tasks` | Get all tasks |
-| GET | `/api/tasks/:id` | Get a task by ID |
+| GET | `/api/tasks` | Retrieve all tasks |
+| GET | `/api/tasks/:id` | Retrieve a task by ID |
 | POST | `/api/tasks` | Create a task |
 | PUT | `/api/tasks/:id` | Update a task |
 | DELETE | `/api/tasks/:id` | Delete a task |
 
-## Testing
+### Example task object
 
-The following application flows have been manually tested:
+```json
+{
+  "title": "Learn Full-Stack Development",
+  "description": "Build the TaskFlow project",
+  "completed": false
+}
+```
 
-- Task persistence after page refresh
-- Task creation
-- Task editing
-- Completion status updates
-- Search filtering
-- Task deletion
-- Empty-title validation
+## Security Notes
+
+- Store MongoDB credentials in `backend/.env`.
+- Never publish `.env` or database passwords.
+- Configure appropriate database network access and credentials in MongoDB Atlas.
+
+## Future Improvements
+
+- User authentication and authorization
+- Task deadlines and priority levels
+- Task filtering and sorting
+- Deployment with a live demo
 
 ## License
 
-This project is intended for learning and educational purposes.
+This project was created for learning and educational purposes.
